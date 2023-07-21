@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PurrfectBrews</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="quoteCof">“Today’s good mood is sponsored by coffee.”</string>
+    <string name="checkPolicy">By creating an account, you agree to the Terms, Use and Privacy Policy</string>
+    <string name="member"><u>I am already a member</u></string>
+    <string name="forgotPass"><u>Forgot your password?</u></string>
+    <string name="alreadyAcc">Already have an account?<b> Sign In</b></string>
+    <string name="newHere">New here? <u>Sign Up instead.</u></string>
+    <string name="quoteCof1">“Three cups of coffee a day keeps the doctor away!”</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
