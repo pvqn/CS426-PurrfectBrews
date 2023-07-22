@@ -8,6 +8,9 @@
     <string name="alreadyAcc">Already have an account?<b> Sign In</b></string>
     <string name="newHere">New here? <u>Sign Up instead.</u></string>
     <string name="quoteCof1">“Three cups of coffee a day keeps the doctor away!”</string>
+    <string name="orderSuccess">Your order has been placed successfully.</string>
+    <string name="moreDetail">For more details, go to my orders.</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

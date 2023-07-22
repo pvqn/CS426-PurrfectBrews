@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();
-        currentFragment = new showingCoffee();
+        currentFragment = new orderedSucess();
         databaseHelper = new CoffeeShopDatabaseHelper(this);
         databaseHelper.insertCoffeeData();
 
