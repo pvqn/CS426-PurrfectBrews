@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".detailCoffee">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/rectange_border"
+            android:textAlignment="center"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/icons8_close"
+            app:title="DETAILS"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/MyTextAppearance"
+            app:titleTextColor="@color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="30dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="5dp">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/i" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/card_bordertop"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/vt323"
+                    android:text="It's time to make your own cup!"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/coffeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Coffee Name"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/buttonMinus"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@drawable/icons8_minus_50"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/quantity"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonPlus"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/white1" />
+
+                    <ImageView
+                        android:id="@+id/buttonPlus"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@drawable/icons8_plus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Shot"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/buttonDouble"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white1"
+                        android:fontFamily="@font/vt323"
+                        android:text="Double"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/buttonSingle"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/white1"
+                        android:fontFamily="@font/vt323"
+                        android:text="Single"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonDouble"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Select"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/buttonCold"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:backgroundTint="@color/white1"
+                        android:contentDescription="Cold"
+                        android:src="@drawable/icons8_iced_coffee_100"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/black" />
+
+                    <ImageButton
+                        android:id="@+id/buttonHot"
+
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/white1"
+                        android:contentDescription="Hot"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icons8_cup_100"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonCold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/black" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Size"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/buttonLarge"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:backgroundTint="@color/white1"
+                        android:contentDescription="Large"
+                        android:src="@drawable/icons8_coffee_cup_100"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/buttonMedium"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/white1"
+                        android:contentDescription="Medium"
+                        android:src="@drawable/icons8_coffee_cup_80"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonLarge"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/white1" />
+
+                    <ImageButton
+                        android:id="@+id/buttonSmall"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/white1"
+                        android:contentDescription="Small"
+                        android:src="@drawable/icons8_coffee_cup_60"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonMedium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/white1" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="60dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Total"
+                        android:textColor="@color/black"
+                        android:textSize="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/priceCoffee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Price"
+                        android:textColor="@color/black"
+                        android:textSize="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/buttonAddCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/vt323"
+                    android:text="Add to cart"
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

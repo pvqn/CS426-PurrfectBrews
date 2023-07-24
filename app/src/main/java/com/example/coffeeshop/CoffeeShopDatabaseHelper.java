@@ -30,6 +30,8 @@ public class CoffeeShopDatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_COFFEE_ID = "coffee_id";
     private static final String KEY_SIZE = "size";
     private static final String KEY_DATE = "date";
+    private static final String KEY_QUANTITY = "quantity";
+
 
     public CoffeeShopDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,7 +44,7 @@ public class CoffeeShopDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTypeOfCoffeeTable);
 
         // Create 'order_history' table
-        String createOrderHistoryTable = "CREATE TABLE " + TABLE_ORDER_HISTORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COFFEE_ID + " INTEGER," + KEY_SIZE + " TEXT," + KEY_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP," + "FOREIGN KEY(" + KEY_COFFEE_ID + ") REFERENCES " + TABLE_COFFEE + "(" + KEY_ID + ")" + ")";
+        String createOrderHistoryTable = "CREATE TABLE " + TABLE_ORDER_HISTORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COFFEE_ID + " INTEGER," + KEY_SIZE + " TEXT," + KEY_QUANTITY + " INTEGER," + KEY_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP," + "FOREIGN KEY(" + KEY_COFFEE_ID + ") REFERENCES " + TABLE_COFFEE + "(" + KEY_ID + ")" + ")";
         db.execSQL(createOrderHistoryTable);
     }
 
@@ -65,27 +67,34 @@ public class CoffeeShopDatabaseHelper extends SQLiteOpenHelper {
         // Sample data for order_history table
         int coffeeId1 = 2; // Assuming 2 corresponds to "Cappuccino" in the type_of_coffee table
         String size1 = "l"; // Assuming 'l' stands for large
+        int quantity1=3;
 
         int coffeeId2 = 3; // Assuming 3 corresponds to "Latte" in the type_of_coffee table
         String size2 = "s"; // Assuming 's' stands for small
+        int quantity2=1;
 
         int coffeeId3 = 5; // Assuming 5 corresponds to "Macchiato" in the type_of_coffee table
         String size3 = "m"; // Assuming 'm' stands for medium
+        int quantity3=2;
 
 // Insert data into order_history table
         ContentValues values1 = new ContentValues();
         values1.put(KEY_COFFEE_ID, coffeeId1);
         values1.put(KEY_SIZE, size1);
+        values1.put(KEY_QUANTITY,quantity1);
         db.insert(TABLE_ORDER_HISTORY, null, values1);
 
         ContentValues values2 = new ContentValues();
         values2.put(KEY_COFFEE_ID, coffeeId2);
         values2.put(KEY_SIZE, size2);
+        values2.put(KEY_QUANTITY, quantity2);
         db.insert(TABLE_ORDER_HISTORY, null, values2);
 
         ContentValues values3 = new ContentValues();
         values3.put(KEY_COFFEE_ID, coffeeId3);
         values3.put(KEY_SIZE, size3);
+        values1.put(KEY_QUANTITY,quantity3);
+
         db.insert(TABLE_ORDER_HISTORY, null, values3);
 
 // Add more order history data as needed
@@ -94,6 +103,7 @@ public class CoffeeShopDatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
     }
+
     public List<Coffee> getAllCoffeeTypes() {
         List<Coffee> coffeeList = new ArrayList<>();
 
@@ -102,9 +112,9 @@ public class CoffeeShopDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_COFFEE, projection, null, null, null, null, null);
 
 
-int[] imageResource = {R.drawable.a,
-        R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f, R.drawable.g, R.drawable.h,
-        R.drawable.i, R.drawable.j};
+        int[] imageResource = {R.drawable.a,
+                R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f, R.drawable.g, R.drawable.h,
+                R.drawable.i, R.drawable.j};
 
 
         int i = 0;
@@ -132,6 +142,7 @@ int[] imageResource = {R.drawable.a,
 
         return coffeeList;
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older tables if needed

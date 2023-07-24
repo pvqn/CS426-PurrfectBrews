@@ -34,18 +34,17 @@ import com.example.coffeeshop.NestedGridView;
  */
 public class showingCoffee extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private List<Coffee> coffeeList;
     private CoffeeShopDatabaseHelper dbHelper;
     private int originalCardHeight = 0;
-
+    private Coffee selectedCoffee;
     public showingCoffee() {
         // Required empty public constructor
     }
@@ -58,7 +57,6 @@ public class showingCoffee extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment showingCoffee.
      */
-    // TODO: Rename and change types and number of parameters
     public static showingCoffee newInstance(String param1, String param2) {
         showingCoffee fragment = new showingCoffee();
         Bundle args = new Bundle();
@@ -90,11 +88,24 @@ public class showingCoffee extends Fragment {
         ImageView imgR=rootView.findViewById(R.id.imgR);
         TextView nameR=rootView.findViewById(R.id.nameR);
         TextView priceR=rootView.findViewById(R.id.priceR);
+        ImageView profile=rootView.findViewById(R.id.profile);
 
+        // random coffee item
         int random=(new Random()).nextInt(9-0)+0;
         Coffee randomC=coffeeList.get(random);
         imgR.setImageResource(randomC.getImage());
+        imgR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change to detail fragment
+                selectedCoffee=randomC;
+                ((MainActivity)requireActivity()).setSelectedCoffee(selectedCoffee);
+                ((MainActivity)requireActivity()).switchToFragmentDetailCoffee();
+            }
+        });
         nameR.setText(randomC.getName());
+        priceR.setText("$"+String.valueOf(randomC.getPrice()));
+
 
         ViewSwitcher viewSwitcher = rootView.findViewById(R.id.viewSwitcher);
         viewSwitcher.setInAnimation(requireContext(), android.R.anim.slide_in_left);
@@ -104,7 +115,7 @@ public class showingCoffee extends Fragment {
         NestedGridView gridCoffeeContainer = rootView.findViewById(R.id.gridCoffeeContainer);
         CardView cardView=rootView.findViewById(R.id.cardView);
 
-        coffeeListAdapter adapter = new coffeeListAdapter(requireContext(), coffeeList);
+       coffeeListAdapter adapter = new coffeeListAdapter(requireContext(), coffeeList,(coffeeListAdapter.OnCoffeeItemClickListener) requireActivity());
 
         int count = 0;
         for (Coffee coffee : coffeeList) {
@@ -112,11 +123,28 @@ public class showingCoffee extends Fragment {
             TextView nameTextView = coffeeItemView.findViewById(R.id.nameCoffee);
             TextView priceTextView = coffeeItemView.findViewById(R.id.priceCoffee);
 
+            //set id for horizontalScrollView
+            // TODO: update id for coffeeListItem
+
+            coffeeItemView.setTag((count+1)*10);
+
             ImageView imageView = coffeeItemView.findViewById(R.id.imageCoffee);
 
             nameTextView.setText(coffee.getName());
             imageView.setImageResource(coffee.getImage());
             priceTextView.setText("$"+String.valueOf(coffee.getPrice()));
+            coffeeItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int index=((int)v.getTag())/10-1;
+                    selectedCoffee=coffeeList.get(index);
+                    ((MainActivity)requireActivity()).setSelectedCoffee(selectedCoffee);
+                    ((MainActivity)requireActivity()).switchToFragmentDetailCoffee();
+                }
+            });
+
+            //set onClick
+
 
             if (count < 5) {
                 coffeeContainer.addView(coffeeItemView);
@@ -143,8 +171,14 @@ public class showingCoffee extends Fragment {
             }
         });
 
-
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).switchToFragmentProfile();
+            }
+        });
         return rootView;
     }
+
 
 }

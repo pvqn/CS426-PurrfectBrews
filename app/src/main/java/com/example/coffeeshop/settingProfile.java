@@ -7,6 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,12 +22,10 @@ import android.view.ViewGroup;
  */
 public class settingProfile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -36,7 +41,6 @@ public class settingProfile extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment settingProfile.
      */
-    // TODO: Rename and change types and number of parameters
     public static settingProfile newInstance(String param1, String param2) {
         settingProfile fragment = new settingProfile();
         Bundle args = new Bundle();
@@ -59,6 +63,32 @@ public class settingProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_setting_profile, container, false);
+        TextInputEditText fullName=rootView.findViewById(R.id.fullName);
+        TextInputEditText email=rootView.findViewById(R.id.email);
+        TextInputEditText address=rootView.findViewById(R.id.address);
+        TextInputEditText phoneNumber=rootView.findViewById(R.id.phoneNumb);
+
+        fullName.setText(((MainActivity)requireActivity()).getName());
+        email.setText(((MainActivity)requireActivity()).getEmail());
+        address.setText(((MainActivity)requireActivity()).getAddress());
+        phoneNumber.setText(((MainActivity)requireActivity()).getPhone());
+
+        MaterialToolbar toolbar = rootView.findViewById(R.id.topAppBar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)requireActivity()).setPhone(phoneNumber.getText().toString());
+                ((MainActivity)requireActivity()).setName(fullName.getText().toString());
+                ((MainActivity)requireActivity()).setEmail(email.getText().toString());
+                ((MainActivity)requireActivity()).setAddress(address.getText().toString());
+
+                ((MainActivity)requireActivity()).switchToFragmentShowingCoffee();
+            }
+        });
+
+        return rootView;
     }
 }

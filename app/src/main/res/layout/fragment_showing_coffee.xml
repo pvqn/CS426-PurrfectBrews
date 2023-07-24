@@ -47,7 +47,7 @@
                         app:strokeColor="@color/black">
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/profile"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:scaleType="centerCrop"
@@ -67,7 +67,7 @@
                         app:layout_constraintEnd_toStartOf="@id/cardImageView"
                         app:layout_constraintStart_toEndOf="@id/textView"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:strokeColor="@color/black">
+                        app:strokeColor="@color/white1">
 
                         <ImageView
                             android:id="@+id/imageCartView"

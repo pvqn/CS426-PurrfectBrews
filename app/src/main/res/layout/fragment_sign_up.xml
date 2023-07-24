@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white1"
                     android:hint="Address"
-                    app:startIconDrawable="@drawable/icons8_contacts">
+                    app:startIconDrawable="@drawable/icons8_home_">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

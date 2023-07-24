@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PurrfectBrews</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="quoteCof">“Today’s good mood is sponsored by coffee.”</string>
     <string name="checkPolicy">By creating an account, you agree to the Terms, Use and Privacy Policy</string>
     <string name="member"><u>I am already a member</u></string>
@@ -11,6 +10,5 @@
     <string name="orderSuccess">Your order has been placed successfully.</string>
     <string name="moreDetail">For more details, go to my orders.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,7 +8,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements coffeeListAdapter.OnCoffeeItemClickListener{
     private FragmentManager fragmentManager = null;
     private Fragment currentFragment = null;
     private String name = "Nhu";
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private String phone = "+1234567890";
     private String address = "227 Nguyen Van Cu, quan 5, TPHCM";
     private int points = 10000;
+    private Coffee selectedCoffee;
     private static CoffeeShopDatabaseHelper databaseHelper;
 
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();
-        currentFragment = new orderedSucess();
+        currentFragment = new settingProfile();
         databaseHelper = new CoffeeShopDatabaseHelper(this);
         databaseHelper.insertCoffeeData();
 
@@ -62,11 +63,32 @@ public class MainActivity extends AppCompatActivity {
         if (currentFragment instanceof showingCoffee) return;
         showingCoffee cur = new showingCoffee();
         if (fragmentManager.findFragmentByTag("showingCoffee") == null)
-            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, cur).addToBackStack("showingCoffee").commit();
-        else fragmentManager.beginTransaction().replace(R.id.fragmentContainer, cur).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer, cur).commit();
+        else fragmentManager.popBackStack("showingCoffee",0);
         currentFragment = cur;
     }
 
+    public void switchToFragmentProfile(){
+        if (currentFragment instanceof settingProfile) return;
+        settingProfile cur=new settingProfile();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+
+    public void switchToFragmentDetailCoffee(){
+        if (currentFragment instanceof detailCoffee) return;
+        detailCoffee cur=new detailCoffee();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+
+    @Override
+    public void onCoffeeItemClick(Coffee coffee) {
+        setSelectedCoffee(coffee);
+        switchToFragmentDetailCoffee();
+    }
     public String getName() {
         return name;
     }
@@ -105,5 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+    public Coffee getSelectedCoffee() {
+        return selectedCoffee;
+    }
+
+    public void setSelectedCoffee(Coffee selectedCoffee) {
+        this.selectedCoffee = selectedCoffee;
     }
 }

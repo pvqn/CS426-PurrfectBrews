@@ -7,24 +7,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WelcomeScreen#newInstance} factory method to
+ * Use the {@link my_cart#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WelcomeScreen extends Fragment {
+public class my_cart extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public WelcomeScreen() {
+    public my_cart() {
         // Required empty public constructor
     }
 
@@ -34,10 +34,11 @@ public class WelcomeScreen extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WelcomeScreen.
+     * @return A new instance of fragment my_cart.
      */
-    public static WelcomeScreen newInstance(String param1, String param2) {
-        WelcomeScreen fragment = new WelcomeScreen();
+    // TODO: Rename and change types and number of parameters
+    public static my_cart newInstance(String param1, String param2) {
+        my_cart fragment = new my_cart();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,21 +58,7 @@ public class WelcomeScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
-        Button getStarted = rootView.findViewById(R.id.signUp);
-        getStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) requireActivity()).switchToFragmentSignUp();
-            }
-        });
-        TextView signIn = rootView.findViewById(R.id.signIn);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) requireActivity()).switchToFragmentSignIn();
-            }
-        });
-        return rootView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_my_cart, container, false);
     }
 }

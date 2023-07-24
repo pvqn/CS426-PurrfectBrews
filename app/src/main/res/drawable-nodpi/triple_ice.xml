@@ -1,0 +1,28 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="42dp"
+    android:height="28dp"
+    android:viewportWidth="42"
+    android:viewportHeight="28">
+
+    <!-- First Ice Cube -->
+    <path
+        android:pathData="M8,0.85L14,0.85A3.15,3.15 0,0 1,17.15 4L17.15,10A3.15,3.15 0,0 1,14 13.15L8,13.15A3.15,3.15 0,0 1,4.85 10L4.85,4A3.15,3.15 0,0 1,8 0.85z"
+        android:strokeWidth="1.7"
+        android:fillColor="#00000000"
+        android:strokeColor="#D8D8D8"/>
+
+    <!-- Second Ice Cube -->
+    <path
+        android:pathData="M23,0.85L29,0.85A3.15,3.15 0,0 1,32.15 4L32.15,10A3.15,3.15 0,0 1,29 13.15L23,13.15A3.15,3.15 0,0 1,19.85 10L19.85,4A3.15,3.15 0,0 1,23 0.85z"
+        android:strokeWidth="1.7"
+        android:fillColor="#00000000"
+        android:strokeColor="#D8D8D8"/>
+
+    <!-- Third Ice Cube -->
+    <path
+        android:pathData="M16,14.85L22,14.85A3.15,3.15 0,0 1,25.15 18L25.15,24A3.15,3.15 0,0 1,22 27.15L16,27.15A3.15,3.15 0,0 1,12.85 24L12.85,18A3.15,3.15 0,0 1,16 14.85z"
+        android:strokeWidth="1.7"
+        android:fillColor="#00000000"
+        android:strokeColor="#D8D8D8"/>
+
+</vector>
