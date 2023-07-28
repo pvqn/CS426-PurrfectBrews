@@ -99,7 +99,7 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
                 for (int i = 0; i < mAdapter.getData().size(); ++i) {
                     if (mAdapter.getData().get(i).isSelected()) {
                         mAdapter.getData().get(i).setSelected(false);
-                        ((MainActivity)requireActivity()).updateScore((int)round(mAdapter.getData().get(i).getPrice()*10));
+                        ((MainActivity)requireActivity()).updateScore((int)round(mAdapter.getData().get(i).getPrice()*10), false);
                         mAdapter.getData().get(i).setDateTime(currentDate + " " + currentTime);
                         tempOrdered.add((mAdapter.getData().get(i)));
 

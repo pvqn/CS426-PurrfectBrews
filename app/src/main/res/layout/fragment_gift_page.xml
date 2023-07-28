@@ -192,6 +192,7 @@
                         android:layout_height="wrap_content"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:text="Redeem drinks"
+                        android:id="@+id/redeemDrinks"
                         android:backgroundTint="@color/white1"
                         android:textColor="@color/black"
                         app:layout_constraintTop_toTopOf="parent"

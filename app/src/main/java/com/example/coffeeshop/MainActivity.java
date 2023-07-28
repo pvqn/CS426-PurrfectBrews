@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     private int score = 1000;
     private int cardProgress=0;
 
-    public void updateScore(int t)
+    public void updateScore(int t, boolean isMinus)
     {
-        score+=t;
+        if (!isMinus)
+            score+=t;
+        else score-=t;
     }
     public void updateCardProgress(int t, boolean isMinus)
     {
@@ -141,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     public void switchToFragmentGift(){
         if (currentFragment instanceof giftPage) return;
         giftPage cur=new giftPage();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+
+    public void switchToFragmentRedeem(){
+        if (currentFragment instanceof redeemPage) return;
+        redeemPage cur=new redeemPage();
         fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
         currentFragment=cur;
 

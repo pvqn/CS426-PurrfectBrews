@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -105,13 +106,22 @@ public class giftPage extends Fragment implements BottomNavigationView.OnItemSel
         materialCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)requireActivity()).updateCardProgress(8,true);
-                cardProgress-=8;
-                setCardProgress();
-                cardProgressText.setText(String.valueOf(cardProgress) + "/8");
-                ((MainActivity)requireActivity()).updateScore(8*2);
-                totalPoint.setText(String.valueOf(((MainActivity)requireActivity()).getScore()));
+                if (cardProgress>0) {
+                    ((MainActivity) requireActivity()).updateCardProgress(8, true);
+                    cardProgress -= 8;
+                    setCardProgress();
+                    cardProgressText.setText(String.valueOf(cardProgress) + "/8");
+                    ((MainActivity) requireActivity()).updateScore(8 * 2, false);
+                    totalPoint.setText(String.valueOf(((MainActivity) requireActivity()).getScore()));
+                }
+            }
+        });
 
+        Button redeemDrinks=rootView.findViewById(R.id.redeemDrinks);
+        redeemDrinks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).switchToFragmentRedeem();
             }
         });
 
