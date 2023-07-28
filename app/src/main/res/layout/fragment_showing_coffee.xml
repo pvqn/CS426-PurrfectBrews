@@ -141,67 +141,131 @@
                 android:id="@+id/memberCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/white1"
-                    android:backgroundTint="@color/white1"
-                    app:cardCornerRadius="10dp"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp">
-
+                    android:id="@+id/loyaltyCard"
+                    app:cardBackgroundColor="@color/black">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="10dp"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/victo_mono"
-                            android:letterSpacing="0.3"
-                            android:text="MEMBERSHIP CARD"
-                            android:textColor="@color/black"
-                            android:textFontWeight="1000"
-                            android:textSize="15sp" />
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp">
 
-                        <TextView
-                            android:id="@+id/points"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/vt323"
+                                android:text="Loyalty Card"
+                                android:textColor="@color/white1"
+                                android:textSize="17sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/vt323"
+                                android:text="4/8"
+                                android:id="@+id/cardProgress"
+                                android:textColor="@color/white1"
+                                android:textSize="17sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/vt323"
-                            android:letterSpacing="0.3"
-                            android:text="123245"
-                            android:textColor="@color/black" />
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/cardborder1"
+                            android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:scaleType="centerCrop"
-                            android:scaleX="1.2"
-                            android:scaleY="0.45"
-                            android:src="@drawable/barcode_7000118_960_720" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/a"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/b"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/c"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/d"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/e"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/f"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/g"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/h"
+                                    android:src="@drawable/icons8_coffee_cup_100" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
                     </LinearLayout>
-
-
                 </com.google.android.material.card.MaterialCardView>
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/memberCard"
-
                 android:background="@drawable/card_bordertop"
                 android:backgroundTint="@color/black"
                 android:orientation="vertical">

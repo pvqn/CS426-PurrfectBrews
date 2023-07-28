@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -74,6 +75,37 @@ public class settingProfile extends Fragment {
         address.setText(((MainActivity)requireActivity()).getAddress());
         phoneNumber.setText(((MainActivity)requireActivity()).getPhone());
 
+        ImageView test=rootView.findViewById(R.id.editName);
+        ImageView test1=rootView.findViewById(R.id.editEmail);
+
+        ImageView test2=rootView.findViewById(R.id.editPhoneNumb);
+
+        ImageView test3=rootView.findViewById(R.id.editAddress);
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fullName.setEnabled(true);
+            }
+        });
+        test1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email.setEnabled(true);
+            }
+        });
+        test2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phoneNumber.setEnabled(true);
+            }
+        });
+        test3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                address.setEnabled(true);
+            }
+        });
         MaterialToolbar toolbar = rootView.findViewById(R.id.topAppBar);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

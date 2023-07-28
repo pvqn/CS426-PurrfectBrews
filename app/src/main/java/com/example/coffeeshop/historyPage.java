@@ -62,7 +62,6 @@ public class historyPage extends Fragment implements coffeeCartRecycleAdapter.On
     // Method to load history data (You can replace this with your own data loading mechanism)
     private void loadHistoryData() {
         billItems = ((MainActivity) requireActivity()).getBillItemsHistory();
-        Collections.reverse(billItems);
         billAdapter.setBillItems(billItems);
         billAdapter.notifyDataSetChanged();
     }

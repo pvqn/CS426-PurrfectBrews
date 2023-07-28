@@ -29,8 +29,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:layout_marginTop="70dp"
+        android:fillViewport="true"
         app:layout_anchor="@id/topAppBar"
         app:layout_anchorGravity="center">
 
@@ -70,104 +70,177 @@
                 android:text="Edit Avatar"
                 android:textAlignment="center"
                 android:textAllCaps="true" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/card_bordertop"
-    android:alpha="0.8"
-    android:layout_marginTop="20dp"
-    android:orientation="vertical">
-            <com.google.android.material.textfield.TextInputLayout
 
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Full Name"
-                app:boxStrokeColor="@color/black"
-                app:boxBackgroundColor="@color/white1"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="30dp"
-                app:boxStrokeWidth="2dp"
-                app:startIconDrawable="@drawable/icons8_user_male"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/icons8_edit_1_">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:alpha="0.8"
+                android:background="@drawable/card_bordertop"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fullName"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Full Name"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:letterSpacing="0.1" />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                app:boxStrokeColor="@color/black"
-                app:boxBackgroundColor="@color/white1"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="10dp"
-                app:boxStrokeWidth="2dp"
-                app:startIconDrawable="@drawable/icons8_mailbox"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/icons8_edit_1_">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:hint="Full Name"
+                        app:boxBackgroundColor="@color/white1"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp"
+                        app:endIconMode="custom"
+                        app:layout_constraintBottom_toBottomOf="parent"
 
-                <com.google.android.material.textfield.TextInputEditText
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/icons8_user_male">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:fontFamily="sans-serif-condensed-light"
+                            android:letterSpacing="0.1"
+                            android:text="Full Name" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/editName"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icons8_edit_1_"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:id="@+id/email"
-                    android:fontFamily="sans-serif-condensed-light"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Address"
-                app:boxStrokeColor="@color/black"
-                app:boxBackgroundColor="@color/white1"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="10dp"
-                app:boxStrokeWidth="2dp"
-                app:startIconDrawable="@drawable/icons8_home_"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/icons8_edit_1_">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:hint="Email"
+                        app:boxBackgroundColor="@color/white1"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
 
-                <com.google.android.material.textfield.TextInputEditText
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/icons8_mailbox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:fontFamily="sans-serif-condensed-light"
+                            android:text="Email" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/editEmail"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icons8_edit_1_"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:id="@+id/address"
-                    android:fontFamily="sans-serif-condensed-light"
-                    />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone Number"
-                app:boxStrokeColor="@color/black"
-                app:boxBackgroundColor="@color/white1"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="10dp"
-                app:boxStrokeWidth="2dp"
-                app:startIconDrawable="@drawable/icons8_contacts"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/icons8_edit_1_">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:hint="Address"
+                        app:boxBackgroundColor="@color/white1"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/icons8_home_">
 
-                <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:fontFamily="sans-serif-condensed-light"
+                            android:text="Address" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/editAddress"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icons8_edit_1_"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Phone Number"
-                    android:id="@+id/phoneNumb"
-                    android:fontFamily="sans-serif-condensed-light"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp">
+                <com.google.android.material.textfield.TextInputLayout
 
-            </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:hint="Phone Number"
+                    app:boxBackgroundColor="@color/white1"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/icons8_contacts"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneNumb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Phone Number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/editPhoneNumb"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icons8_edit_1_"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

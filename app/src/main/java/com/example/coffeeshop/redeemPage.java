@@ -82,10 +82,10 @@ public class redeemPage extends Fragment {
                 if (score>=1500)
                 {
                     ((MainActivity)requireActivity()).updateScore(1500, true);
-                    Toast.makeText(requireContext(), "-1500 point. Your point: "+ String.valueOf(score-1500), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "-1500 points. Your points: "+ String.valueOf(score-1500), Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(requireContext(), "Your point is not enough to exchange.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Your points are not enough to exchange.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -97,10 +97,10 @@ public class redeemPage extends Fragment {
                 if (score>=1000)
                 {
                     ((MainActivity)requireActivity()).updateScore(1000, true);
-                    Toast.makeText(requireContext(), "-1000 point. Your point: "+ String.valueOf(score-1000), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "-1000 points. Your points: "+ String.valueOf(score-1000), Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(requireContext(), "Your point is not enough to exchange.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Your points are not enough to exchange.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -112,10 +112,10 @@ public class redeemPage extends Fragment {
                 if (score>=1200)
                 {
                     ((MainActivity)requireActivity()).updateScore(1200, true);
-                    Toast.makeText(requireContext(), "-1200 point. Your point: "+ String.valueOf(score-1200), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "-1200 points. Your points: "+ String.valueOf(score-1200), Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(requireContext(), "Your point is not enough to exchange.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Your points are not enough to exchange.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

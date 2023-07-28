@@ -38,7 +38,7 @@ public class coffeeRewardRecycleAdapter extends RecyclerView.Adapter<coffeeRewar
         // Bind data to the views in the ViewHolder
         CoffeeCart coffeeCart = coffeeCartList.get(position);
         holder.tvCoffeeName.setText(coffeeCart.getCoffee().getName() + " x" + String.valueOf(coffeeCart.getQuantity()));
-        holder.tvPoint.setText(String.valueOf(round(coffeeCart.getPrice() * 10)));
+        holder.tvPoint.setText("+ "+ String.valueOf(round(coffeeCart.getPrice() * 10))+" pts");
         holder.tvDayTime.setText(coffeeCart.getDateTime());
 
         String size, shot, singOrDou, hotOrCold;

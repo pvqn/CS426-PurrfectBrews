@@ -123,7 +123,12 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
                     //Log.d("tempBill",  " coffeeCarts count: " + tempBill.getCoffeeCarts().size());
 
                     ((MainActivity) requireActivity()).addBillItems(tempBill);
-                    ((MainActivity)requireActivity()).updateCardProgress(tempOrdered.size(), false);
+                    int t=0;
+                    for (int i=0; i<tempOrdered.size();++i)
+                    {
+                        t+=tempOrdered.get(i).getQuantity();
+                    }
+                    ((MainActivity)requireActivity()).updateCardProgress(t, false);
 
                     ((MainActivity) requireActivity()).switchToFragmentOrderedSuccess();
                 } else {

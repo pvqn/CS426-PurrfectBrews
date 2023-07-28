@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
@@ -97,6 +98,7 @@ public class giftPage extends Fragment implements BottomNavigationView.OnItemSel
         cardProgressImage.add(rootView.findViewById(R.id.c));
         cardProgressImage.add(rootView.findViewById(R.id.d));
         cardProgressImage.add(rootView.findViewById(R.id.e));
+        cardProgressImage.add(rootView.findViewById(R.id.f));
         cardProgressImage.add(rootView.findViewById(R.id.g));
         cardProgressImage.add(rootView.findViewById(R.id.h));
 
@@ -106,13 +108,14 @@ public class giftPage extends Fragment implements BottomNavigationView.OnItemSel
         materialCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardProgress>0) {
+                if (cardProgress>=8) {
                     ((MainActivity) requireActivity()).updateCardProgress(8, true);
                     cardProgress -= 8;
                     setCardProgress();
                     cardProgressText.setText(String.valueOf(cardProgress) + "/8");
                     ((MainActivity) requireActivity()).updateScore(8 * 2, false);
                     totalPoint.setText(String.valueOf(((MainActivity) requireActivity()).getScore()));
+                    Toast.makeText(requireContext(), "+16 points. Your points: "+ String.valueOf(((MainActivity) requireActivity()).getScore()), Toast.LENGTH_SHORT).show();
                 }
             }
         });

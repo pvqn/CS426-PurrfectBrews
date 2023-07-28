@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import org.w3c.dom.Text;
@@ -30,6 +31,7 @@ import java.util.Random;
 
 import com.example.coffeeshop.NestedGridView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.card.MaterialCardView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +55,10 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
     public showingCoffee() {
         // Required empty public constructor
     }
+    private ArrayList<ImageView> cardProgressImage=new ArrayList<>();
+    private MaterialCardView materialCardView;
+    private int cardProgress;
+    private TextView cardProgressText;
 
     /**
      * Use this factory method to create a new instance of
@@ -87,6 +93,45 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
         View rootView = inflater.inflate(R.layout.fragment_showing_coffee, container, false);
         dbHelper = MainActivity.getDatabaseHelper();
         coffeeList = dbHelper.getAllCoffeeTypes();
+
+        ArrayList<BillItem> billItem = ((MainActivity) requireActivity()).getBillItemsHistory();
+        ArrayList<CoffeeCart> coffeeCarts = new ArrayList<>();
+        for (int i = 0; i < billItem.size(); ++i) {
+            for (int j = 0; j < billItem.get(i).getCoffeeCarts().size(); ++j)
+                coffeeCarts.add(billItem.get(i).getCoffeeCarts().get(j));
+        }
+
+        cardProgress = ((MainActivity) requireActivity()).getCardProgress();
+
+        cardProgressText = rootView.findViewById(R.id.cardProgress);
+        cardProgressText.setText(String.valueOf(cardProgress) + "/8");
+
+        cardProgressImage.add(rootView.findViewById(R.id.a));
+        cardProgressImage.add(rootView.findViewById(R.id.b));
+        cardProgressImage.add(rootView.findViewById(R.id.c));
+        cardProgressImage.add(rootView.findViewById(R.id.d));
+        cardProgressImage.add(rootView.findViewById(R.id.e));
+        cardProgressImage.add(rootView.findViewById(R.id.f));
+        cardProgressImage.add(rootView.findViewById(R.id.g));
+        cardProgressImage.add(rootView.findViewById(R.id.h));
+
+        setCardProgress();
+
+        materialCardView=rootView.findViewById(R.id.loyaltyCard);
+        materialCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cardProgress>=8) {
+                    ((MainActivity) requireActivity()).updateCardProgress(8, true);
+                    cardProgress -= 8;
+                    setCardProgress();
+                    cardProgressText.setText(String.valueOf(cardProgress) + "/8");
+                    ((MainActivity) requireActivity()).updateScore(8 * 2, false);
+                    Toast.makeText(requireContext(), "+16 points. Your points: "+ String.valueOf(((MainActivity) requireActivity()).getScore()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(this);
@@ -128,7 +173,6 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
 
         LinearLayout coffeeContainer = rootView.findViewById(R.id.coffeeContainer);
         NestedGridView gridCoffeeContainer = rootView.findViewById(R.id.gridCoffeeContainer);
-        CardView cardView=rootView.findViewById(R.id.cardView);
 
        coffeeListAdapter adapter = new coffeeListAdapter(requireContext(), coffeeList,(coffeeListAdapter.OnCoffeeItemClickListener) requireActivity());
 
@@ -207,5 +251,20 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
         return false;
     }
 
+    private void setCardProgress() {
+        if (cardProgress > 8) {
+            for (int i = 0; i < cardProgressImage.size(); ++i) {
+                cardProgressImage.get(i).setImageResource(R.drawable.icons8_coffee_cup_100);
+            }
+        } else {
 
+            for (int i = 0; i < cardProgress; ++i) {
+                cardProgressImage.get(i).setImageResource(R.drawable.icons8_coffee_cup_100);
+            }
+            for (int i = cardProgress; i < cardProgressImage.size(); ++i) {
+                cardProgressImage.get(i).setImageResource(R.drawable.icons8_coffee_cup_100_1);
+            }
+
+        }
+    }
 }
