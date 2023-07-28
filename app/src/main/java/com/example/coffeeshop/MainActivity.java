@@ -8,6 +8,9 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements coffeeListAdapter.OnCoffeeItemClickListener{
     private FragmentManager fragmentManager = null;
     private Fragment currentFragment = null;
@@ -18,7 +21,37 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     private int points = 10000;
     private Coffee selectedCoffee;
     private static CoffeeShopDatabaseHelper databaseHelper;
+    private ArrayList<CoffeeCart> coffeeCarts = new ArrayList<>();
+    private ArrayList<BillItem> billItems=new ArrayList<>();
+    private ArrayList<BillItem> billItemsHistory=new ArrayList<>();
 
+    private ArrayList<CoffeeCart> orderedCoffeeCarts = new ArrayList<>();
+    private int score = 1000;
+    private int cardProgress=0;
+
+    public void updateScore(int t)
+    {
+        score+=t;
+    }
+    public void updateCardProgress(int t, boolean isMinus)
+    {
+        if (!isMinus)
+        cardProgress+=t;
+        else cardProgress-=8;
+    }
+
+    public int getCardProgress()
+    {
+        return cardProgress;
+    }
+    public void addOrderedCoffeeCarts(CoffeeCart coffeeCart)
+    {
+        orderedCoffeeCarts.add(coffeeCart);
+    }
+    public ArrayList<CoffeeCart> getOrderedCoffeeCarts()
+    {
+        return orderedCoffeeCarts;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();
-        currentFragment = new settingProfile();
+        currentFragment = new showingCoffee();
         databaseHelper = new CoffeeShopDatabaseHelper(this);
         databaseHelper.insertCoffeeData();
 
@@ -83,6 +116,36 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
         currentFragment=cur;
 
     }
+    public void switchToFragmentMyCart(){
+        if (currentFragment instanceof myCart) return;
+        myCart cur=new myCart();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+    public void switchToFragmentOrderedSuccess(){
+        if (currentFragment instanceof orderedSucess) return;
+        orderedSucess cur=new orderedSucess();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+    public void switchToFragmentOrderHistory(){
+        if (currentFragment instanceof orderHistory) return;
+        orderHistory cur=new orderHistory();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+
+    public void switchToFragmentGift(){
+        if (currentFragment instanceof giftPage) return;
+        giftPage cur=new giftPage();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
+
 
     @Override
     public void onCoffeeItemClick(Coffee coffee) {
@@ -134,5 +197,45 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
 
     public void setSelectedCoffee(Coffee selectedCoffee) {
         this.selectedCoffee = selectedCoffee;
+    }
+
+    public ArrayList<CoffeeCart> getCoffeeCarts() {
+        return coffeeCarts;
+    }
+
+    public void setCoffeeCarts(ArrayList<CoffeeCart> coffeeCarts) {
+        this.coffeeCarts = coffeeCarts;
+    }
+
+
+
+
+    public void removeAllCoffeeCart()
+    {
+        this.coffeeCarts.clear();
+    }
+
+    public void addCoffeeCart(CoffeeCart coffeeCart)
+    {
+        this.coffeeCarts.add(coffeeCart);
+    }
+
+    public ArrayList<BillItem> getBillItems() {
+        return billItems;
+    }
+    public ArrayList<BillItem> getBillItemsHistory() {
+        return billItemsHistory;
+    }
+
+    public void addBillItems(BillItem billItems) {
+        this.billItems.add(billItems);
+    }
+    public void addBillItemsHistory(BillItem billItems) {
+        this.billItemsHistory.add(billItems);
+    }
+
+
+    public int getScore() {
+        return score;
     }
 }

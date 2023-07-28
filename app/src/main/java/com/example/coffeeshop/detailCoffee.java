@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class detailCoffee extends Fragment {
     private double priceOff;
     private double quantityCur;
     private boolean isSingle;
+    private boolean isHot;
+    private int size;
 
     public detailCoffee() {
         // Required empty public constructor
@@ -94,12 +97,14 @@ public class detailCoffee extends Fragment {
         Button addCart = rootView.findViewById(R.id.buttonAddCart);
 
         coffee = ((MainActivity) requireActivity()).getSelectedCoffee();
+
         image.setImageResource(coffee.getImage());
         name.setText(coffee.getName());
         price.setText("$" + String.valueOf(coffee.getPrice()));
         priceOff = coffee.getPrice();
         quantityCur = Integer.valueOf(quantity.getText().toString());
         isSingle=true;
+        isHot = true;
 
         MaterialToolbar toolbar = rootView.findViewById(R.id.topAppBar);
 
@@ -110,6 +115,19 @@ public class detailCoffee extends Fragment {
                 ((MainActivity)requireActivity()).switchToFragmentShowingCoffee();
             }
         });
+
+
+        toolbar.setOnMenuItemClickListener(new MaterialToolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.cart) {
+                    ((MainActivity)requireActivity()).switchToFragmentMyCart();
+                    return true;
+                }
+                return false;}
+
+        });
+
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +157,7 @@ public class detailCoffee extends Fragment {
             @Override
             public void onClick(View v) {
                 priceOff=coffee.getPrice();
+                size = 1;
                 small.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.pale));
                 medium.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
                 large.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
@@ -149,6 +168,7 @@ public class detailCoffee extends Fragment {
             @Override
             public void onClick(View v) {
                 priceOff=coffee.getPrice()+0.5;
+                size = 2;
                 medium.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.pale));
                 small.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
                 large.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
@@ -160,6 +180,7 @@ public class detailCoffee extends Fragment {
             @Override
             public void onClick(View v) {
                 priceOff=coffee.getPrice()+1.0;
+                size = 3;
                 large.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.pale));
                 small.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
                 medium.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
@@ -189,6 +210,7 @@ public class detailCoffee extends Fragment {
         hot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isHot = true;
                 cold.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
                 hot.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.pale));
             }
@@ -196,6 +218,7 @@ public class detailCoffee extends Fragment {
         cold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isHot = false;
                 hot.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.white1));
                 cold.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.pale));
             }
@@ -204,7 +227,16 @@ public class detailCoffee extends Fragment {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CoffeeCart coffeeCart = new CoffeeCart();
+                coffeeCart.setCoffee(coffee);
+                coffeeCart.setQuantity((int)quantityCur);
+                coffeeCart.setIsHot(isHot);
+                coffeeCart.setSingle(isSingle);
+                coffeeCart.setSize(size);
+                coffeeCart.setPrice(calPrice());
+                ((MainActivity)requireActivity()).getCoffeeCarts().add(coffeeCart);
                 Toast.makeText(requireContext(), "Added successfully", Toast.LENGTH_SHORT).show();
+                ((MainActivity)requireActivity()).switchToFragmentMyCart();
             }
         });
         return rootView;
@@ -238,5 +270,21 @@ public class detailCoffee extends Fragment {
         double t;
         if (isSingle) t=0; else t=1;
         return priceOff*quantityCur+0.5*quantityCur*t;
+    }
+
+    public boolean isHot() {
+        return isHot;
+    }
+
+    public void setHot(boolean hot) {
+        isHot = hot;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

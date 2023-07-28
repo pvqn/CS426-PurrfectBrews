@@ -71,6 +71,7 @@ public class orderedSucess extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_ordered_sucess, container, false);
+
         KonfettiView konfettiView=rootView.findViewById(R.id.konfettiView);
         List<Size> size= new ArrayList<Size>();
         size.add(Size.Companion.getSMALL());
@@ -96,6 +97,13 @@ public class orderedSucess extends Fragment {
         konfettiView.start(new Party(0,360,30,0,0.9f, size, Color, shape,2000,true, position,0, rotation, emitter));
 
         Button backHome = rootView.findViewById(R.id.backHome);
+        Button trackMyOrder=rootView.findViewById(R.id.trackOrder);
+        trackMyOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).switchToFragmentOrderHistory();
+            }
+        });
         backHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

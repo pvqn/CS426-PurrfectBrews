@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#3F2305</color>
+    <color name="black1">#7E6346</color>
+
     <color name="white">#F5F5F5</color>
-    <color name="pale">#F2EAD3</color>
+    <color name="pale">#F0EADB</color>
     <color name="darkPale">#DFD7BF</color>
     <color name="white1">#FFFFFF</color>
 </resources>

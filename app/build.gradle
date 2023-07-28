@@ -36,6 +36,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'nl.dionsegijn:konfetti-xml:2.0.3'
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 // This rule will substitute kotlin-stdlib-jdk8 for kotlin-stdlib if they both contain the same class.
     modules {
         module("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {

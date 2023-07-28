@@ -4,11 +4,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +29,15 @@ import java.util.List;
 import java.util.Random;
 
 import com.example.coffeeshop.NestedGridView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link showingCoffee#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class showingCoffee extends Fragment {
+// TODO: implement navigation bar, set background item of navigation bar to pale
+public class showingCoffee extends Fragment implements BottomNavigationView.OnItemSelectedListener{
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -83,12 +88,22 @@ public class showingCoffee extends Fragment {
         dbHelper = MainActivity.getDatabaseHelper();
         coffeeList = dbHelper.getAllCoffeeTypes();
 
+        BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(this);
         TextView welcome=rootView.findViewById(R.id.welcome);
         welcome.setText("How are you today, " + ((MainActivity)requireActivity()).getName()+"?");
         ImageView imgR=rootView.findViewById(R.id.imgR);
         TextView nameR=rootView.findViewById(R.id.nameR);
-        TextView priceR=rootView.findViewById(R.id.priceR);
         ImageView profile=rootView.findViewById(R.id.profile);
+        ImageView myCart = rootView.findViewById(R.id.imageCartView);
+        TextView coffeeDescription= rootView.findViewById(R.id.coffeeDescription);
+
+        myCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).switchToFragmentMyCart();
+            }
+        });
 
         // random coffee item
         int random=(new Random()).nextInt(9-0)+0;
@@ -104,7 +119,7 @@ public class showingCoffee extends Fragment {
             }
         });
         nameR.setText(randomC.getName());
-        priceR.setText("$"+String.valueOf(randomC.getPrice()));
+        coffeeDescription.setText("\""+ randomC.getDescription() + "\"");
 
 
         ViewSwitcher viewSwitcher = rootView.findViewById(R.id.viewSwitcher);
@@ -178,6 +193,18 @@ public class showingCoffee extends Fragment {
             }
         });
         return rootView;
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.history) {// Respond to navigation item 1 click
+            ((MainActivity)requireActivity()).switchToFragmentOrderHistory();
+            return true;
+        } else if (itemId == R.id.gift) {// Respond to navigation item 2 click
+            ((MainActivity)requireActivity()).switchToFragmentGift();
+            return true;
+        }
+        return false;
     }
 
 
