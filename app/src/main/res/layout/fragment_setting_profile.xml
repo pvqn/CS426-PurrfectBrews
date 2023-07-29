@@ -55,6 +55,7 @@
                     android:layout_height="140dp"
                     android:scaleType="centerCrop"
                     android:scaleX="1.5"
+                    android:id="@+id/profile"
                     android:scaleY="1.5"
                     android:src="@drawable/drawkit_vector_illustrations_call_waiting" />
 
@@ -68,6 +69,7 @@
                 android:backgroundTint="@color/black"
                 android:fontFamily="@font/vt323"
                 android:text="Edit Avatar"
+                android:id="@+id/editAvatar"
                 android:textAlignment="center"
                 android:textAllCaps="true" />
 
@@ -91,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="40dp"
                         android:hint="Full Name"
+                        android:textColorHint="@color/black"
                         app:boxBackgroundColor="@color/white1"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidth="2dp"
@@ -108,7 +111,8 @@
                             android:enabled="false"
                             android:fontFamily="sans-serif-condensed-light"
                             android:letterSpacing="0.1"
-                            android:text="Full Name" />
+                            android:text="Full Name"
+                            android:textCursorDrawable="@drawable/cursor_color"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,6 +141,8 @@
                         app:boxBackgroundColor="@color/white1"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidth="2dp"
+                        android:textColorHint="@color/black"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
 
@@ -149,7 +155,8 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:fontFamily="sans-serif-condensed-light"
-                            android:text="Email" />
+                            android:text="Email"
+                            android:textCursorDrawable="@drawable/cursor_color"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,6 +185,8 @@
                         app:boxBackgroundColor="@color/white1"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidth="2dp"
+                        android:textColorHint="@color/black"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -189,7 +198,8 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:fontFamily="sans-serif-condensed-light"
-                            android:text="Address" />
+                            android:text="Address"
+                            android:textCursorDrawable="@drawable/cursor_color"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -216,6 +226,8 @@
                     app:boxBackgroundColor="@color/white1"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidth="2dp"
+                    android:textColorHint="@color/black"
+
                     app:startIconDrawable="@drawable/icons8_contacts"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +240,8 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:fontFamily="sans-serif-condensed-light"
-                        android:text="Phone Number" />
+                        android:text="Phone Number"
+                        android:textCursorDrawable="@drawable/cursor_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                     <ImageView
@@ -239,6 +252,23 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SIGN OUT"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:fontFamily="@font/vt323"
+                        android:backgroundTint="@color/black"
+                        android:textColor="@color/white1"
+                        android:id="@+id/signOut"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </LinearLayout>

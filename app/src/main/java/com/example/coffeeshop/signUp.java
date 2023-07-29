@@ -2,6 +2,7 @@ package com.example.coffeeshop;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,9 +71,9 @@ public class signUp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView=inflater.inflate(R.layout.fragment_sign_up, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sign_up, container, false);
         TextView signIn = rootView.findViewById(R.id.signIn);
-        Button createAcc=rootView.findViewById(R.id.createAcc);
+        Button createAcc = rootView.findViewById(R.id.createAcc);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,20 +82,47 @@ public class signUp extends Fragment {
                 //Toast.makeText(requireContext(), "test", Toast.LENGTH_SHORT).show();
             }
         });
-createAcc.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        TextView name=rootView.findViewById(R.id.fullName);
-        TextView email=rootView.findViewById(R.id.email);
-        TextView address=rootView.findViewById(R.id.address);
+        createAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView name = rootView.findViewById(R.id.fullName);
+                TextView email = rootView.findViewById(R.id.email);
+                TextView address = rootView.findViewById(R.id.address);
+                TextView password = rootView.findViewById(R.id.password);
 
-        ((MainActivity)requireActivity()).setName(name.getText().toString());
-        ((MainActivity)requireActivity()).setAddress(address.getText().toString());
-        ((MainActivity)requireActivity()).setEmail(email.getText().toString());
+                String userEmail = email.getText().toString();
+                String userPassword = password.getText().toString();
 
-        ((MainActivity)requireActivity()).switchToFragmentShowingCoffee();
-    }
-});
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                    if (currentUser != null) {
+                                        String userId = currentUser.getUid();
+                                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                                        usersRef.child(userId).child("name").setValue(name.getText().toString());
+                                        usersRef.child(userId).child("address").setValue(address.getText().toString());
+                                        usersRef.child(userId).child("phone").setValue(((MainActivity)requireActivity()).getPhone());
+
+                                        ((MainActivity) requireActivity()).setName(name.getText().toString());
+                                        ((MainActivity) requireActivity()).setAddress(address.getText().toString());
+                                        ((MainActivity) requireActivity()).setEmail(email.getText().toString());
+
+                                        ((MainActivity) requireActivity()).switchToFragmentShowingCoffee();
+                                    }
+                                } else {
+                                    Toast.makeText(requireContext(), "Sign up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
+
+            }
+        });
         return rootView;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.coffeeshop;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -101,6 +102,14 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
                 coffeeCarts.add(billItem.get(i).getCoffeeCarts().get(j));
         }
 
+        ImageView profile=rootView.findViewById(R.id.profile);
+        Bitmap updatedBitmap = ((MainActivity) requireActivity()).getAvatarBitmap();
+
+        if (updatedBitmap != null) {
+            // Set the updated bitmap to the avatar ImageView
+            profile.setImageBitmap(updatedBitmap);
+        }
+
         cardProgress = ((MainActivity) requireActivity()).getCardProgress();
 
         cardProgressText = rootView.findViewById(R.id.cardProgress);
@@ -139,7 +148,7 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
         welcome.setText("How are you today, " + ((MainActivity)requireActivity()).getName()+"?");
         ImageView imgR=rootView.findViewById(R.id.imgR);
         TextView nameR=rootView.findViewById(R.id.nameR);
-        ImageView profile=rootView.findViewById(R.id.profile);
+
         ImageView myCart = rootView.findViewById(R.id.imageCartView);
         TextView coffeeDescription= rootView.findViewById(R.id.coffeeDescription);
 

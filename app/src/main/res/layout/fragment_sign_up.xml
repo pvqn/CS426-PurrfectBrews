@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background1"
     tools:context=".signIn">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,9 +22,7 @@
             android:scaleY="1.75"
             android:layout_gravity="top|right"
             android:scaleX="1.75"/>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -53,13 +53,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white1"
+                    app:boxBackgroundColor="@color/white1"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    android:textColorHint="@color/black"
                     android:hint="Name"
                     app:startIconDrawable="@drawable/icons8_user_male">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fullName"/>
+                        android:id="@+id/fullName"
+                        android:textCursorDrawable="@drawable/cursor_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -68,12 +73,17 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white1"
                     android:hint="Email"
+                    app:boxBackgroundColor="@color/white1"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    android:textColorHint="@color/black"
                     app:startIconDrawable="@drawable/icons8_mailbox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/email"/>
+                        android:id="@+id/email"
+                        android:textCursorDrawable="@drawable/cursor_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,13 +93,19 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white1"
                     android:hint="Password"
+                    app:boxBackgroundColor="@color/white1"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    android:textColorHint="@color/black"
                     app:endIconMode="password_toggle"
                     app:startIconDrawable="@drawable/icons8">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:id="@+id/password"
+                        android:inputType="textPassword"
+                        android:textCursorDrawable="@drawable/cursor_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -98,12 +114,17 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white1"
                     android:hint="Address"
+                    app:boxBackgroundColor="@color/white1"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="2dp"
+                    android:textColorHint="@color/black"
                     app:startIconDrawable="@drawable/icons8_home_">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/address"/>
+                        android:id="@+id/address"
+                        android:textCursorDrawable="@drawable/cursor_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <CheckBox
@@ -111,7 +132,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/checkPolicy"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    app:buttonTint="@color/black"
+                    android:checked="true"/>
 
                 <Button
                     android:id="@+id/createAcc"
@@ -140,8 +163,9 @@
 
             </LinearLayout>
         </LinearLayout>
-</ScrollView>
     </LinearLayout>
+</ScrollView>
+
 
 
 </FrameLayout>

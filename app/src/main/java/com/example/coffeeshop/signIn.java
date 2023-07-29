@@ -2,6 +2,7 @@ package com.example.coffeeshop;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,7 @@ public class signIn extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private FirebaseAuth mAuth;
 
     public signIn() {
         // Required empty public constructor
@@ -61,18 +70,42 @@ public class signIn extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_sign_in, container, false);
         TextView signUp = rootView.findViewById(R.id.signUp);
         Button signIn=rootView.findViewById(R.id.signIn);
+        mAuth = FirebaseAuth.getInstance();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ((MainActivity) requireActivity()).switchToFragmentSignUp();
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)requireActivity()).setEmail(((TextView)rootView.findViewById(R.id.email)).getText().toString());
-                ((MainActivity)requireActivity()).switchToFragmentShowingCoffee();
+                TextView email=rootView.findViewById(R.id.email);
+                TextView password=rootView.findViewById(R.id.password);
+
+                String userEmail=email.getText().toString();
+                String userPassword=password.getText().toString();
+
+                mAuth.signInWithEmailAndPassword(userEmail, userPassword)
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful())
+                                {
+
+                                    ((MainActivity) requireActivity()).fetchUserInfoFromDatabase();
+                                    ((MainActivity) requireActivity()).setEmail(userEmail);
+                                    ((MainActivity) requireActivity()).switchToFragmentShowingCoffee();
+                                }
+                                else {
+                                    Toast.makeText(requireContext(), "Sign in failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
             }
         });
         return rootView;

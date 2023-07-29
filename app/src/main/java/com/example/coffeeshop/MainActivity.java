@@ -1,15 +1,25 @@
 package com.example.coffeeshop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements coffeeListAdapter.OnCoffeeItemClickListener{
     private FragmentManager fragmentManager = null;
@@ -28,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     private ArrayList<CoffeeCart> orderedCoffeeCarts = new ArrayList<>();
     private int score = 1000;
     private int cardProgress=0;
-
+    private Bitmap avatarBitmap;
+    public void setAvatarBitmap(Bitmap bitmap) {
+        this.avatarBitmap = bitmap;
+    }
     public void updateScore(int t, boolean isMinus)
     {
         if (!isMinus)
@@ -59,9 +72,12 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(this);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
 
         fragmentManager = getSupportFragmentManager();
-        currentFragment = new showingCoffee();
+        currentFragment = new WelcomeScreen();
         databaseHelper = new CoffeeShopDatabaseHelper(this);
         databaseHelper.insertCoffeeData();
 
@@ -92,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
             else fragmentManager.popBackStack("signIn", 0);
         } else fragmentManager.beginTransaction().replace(R.id.fragmentContainer, cur).commit();
         currentFragment = cur;
+
     }
 
     public void switchToFragmentShowingCoffee() {
@@ -248,4 +265,39 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     public int getScore() {
         return score;
     }
+
+    public Bitmap getAvatarBitmap() {
+        return avatarBitmap;
+    }
+    public void fetchUserInfoFromDatabase() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    // User data exists, retrieve and set the name and address
+                    String name = dataSnapshot.child("name").getValue(String.class);
+                    String address = dataSnapshot.child("address").getValue(String.class);
+                    String phone = dataSnapshot.child("phone").getValue(String.class);
+
+                    Log.d("ok fetch data","ok");
+                    // Set the name and address in the MainActivity
+                    setName(name);
+                    setPhone(phone);
+                    setAddress(address);
+                }
+                else Log.d("not ok fetch data","ok");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("not ok fetch data","ok");
+            }
+        });
+    }
+
 }

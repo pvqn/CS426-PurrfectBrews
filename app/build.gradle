@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -26,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    repositories {
+    }
+
 }
 
 dependencies {
@@ -37,13 +41,19 @@ dependencies {
     implementation 'nl.dionsegijn:konfetti-xml:2.0.3'
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.yalantis:ucrop:2.2.6'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-// This rule will substitute kotlin-stdlib-jdk8 for kotlin-stdlib if they both contain the same class.
+    implementation platform('com.google.firebase:firebase-bom:32.2.0')
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
+
+    // This rule will substitute kotlin-stdlib-jdk8 for kotlin-stdlib if they both contain the same class.
     modules {
         module("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
             replacedBy("org.jetbrains.kotlin:kotlin-stdlib")
         }
     }
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
