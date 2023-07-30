@@ -9,6 +9,8 @@
     <string name="quoteCof1">“Three cups of coffee a day keeps the doctor away!”</string>
     <string name="orderSuccess">Your order has been placed successfully.</string>
     <string name="moreDetail">For more details, go to my orders.</string>
-
+<string name="intro">Welcome to PurrfectBrews, where cats and coffee blend in purr-fect harmony. Indulge in premium coffee and immerse yourself in the charm of our feline-inspired space. A delightful experience for cat lovers and coffee enthusiasts alike.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="address">227 Nguyen Van Cu, phuong 4, quan 5, TPHCM</string>
+    <string name="product">a project of the Mobile Device Application Development course - CS426</string>
 </resources>

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
     private int score = 1000;
     private int cardProgress=0;
     private Bitmap avatarBitmap;
+    private int newMember=1;
+
     public void setAvatarBitmap(Bitmap bitmap) {
         this.avatarBitmap = bitmap;
     }
@@ -172,6 +174,13 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
         currentFragment=cur;
 
     }
+    public void switchToFragmentIntro(){
+        if (currentFragment instanceof intro) return;
+        intro cur=new intro();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer,cur).commit();
+        currentFragment=cur;
+
+    }
 
 
     @Override
@@ -282,9 +291,10 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
                     String name = dataSnapshot.child("name").getValue(String.class);
                     String address = dataSnapshot.child("address").getValue(String.class);
                     String phone = dataSnapshot.child("phone").getValue(String.class);
-
+                    int newMem=dataSnapshot.child("newMember").getValue(int.class);
                     Log.d("ok fetch data","ok");
                     // Set the name and address in the MainActivity
+                    setNewMember(newMem);
                     setName(name);
                     setPhone(phone);
                     setAddress(address);
@@ -300,4 +310,11 @@ public class MainActivity extends AppCompatActivity implements coffeeListAdapter
         });
     }
 
+    public int getNewMember() {
+        return newMember;
+    }
+
+    public void setNewMember(int newMember) {
+        this.newMember = newMember;
+    }
 }

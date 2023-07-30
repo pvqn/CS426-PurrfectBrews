@@ -106,12 +106,13 @@ public class signUp extends Fragment {
                                         usersRef.child(userId).child("name").setValue(name.getText().toString());
                                         usersRef.child(userId).child("address").setValue(address.getText().toString());
                                         usersRef.child(userId).child("phone").setValue(((MainActivity)requireActivity()).getPhone());
+                                        usersRef.child(userId).child("newMember").setValue(1);
 
                                         ((MainActivity) requireActivity()).setName(name.getText().toString());
                                         ((MainActivity) requireActivity()).setAddress(address.getText().toString());
                                         ((MainActivity) requireActivity()).setEmail(email.getText().toString());
 
-                                        ((MainActivity) requireActivity()).switchToFragmentShowingCoffee();
+                                        ((MainActivity) requireActivity()).switchToFragmentIntro();
                                     }
                                 } else {
                                     Toast.makeText(requireContext(), "Sign up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

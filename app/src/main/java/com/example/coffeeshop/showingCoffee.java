@@ -145,7 +145,7 @@ public class showingCoffee extends Fragment implements BottomNavigationView.OnIt
         BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(this);
         TextView welcome=rootView.findViewById(R.id.welcome);
-        welcome.setText("How are you today, " + ((MainActivity)requireActivity()).getName()+"?");
+        welcome.setText("How are you today?");
         ImageView imgR=rootView.findViewById(R.id.imgR);
         TextView nameR=rootView.findViewById(R.id.nameR);
 

@@ -97,7 +97,7 @@ public class signIn extends Fragment {
 
                                     ((MainActivity) requireActivity()).fetchUserInfoFromDatabase();
                                     ((MainActivity) requireActivity()).setEmail(userEmail);
-                                    ((MainActivity) requireActivity()).switchToFragmentShowingCoffee();
+                                    ((MainActivity) requireActivity()).switchToFragmentIntro();
                                 }
                                 else {
                                     Toast.makeText(requireContext(), "Sign in failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

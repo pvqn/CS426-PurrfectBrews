@@ -14,16 +14,24 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -42,11 +50,12 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
     coffeeCartRecycleAdapter mAdapter;
     CoordinatorLayout coordinatorLayout;
     ArrayList<CoffeeCart> coffeeCarts;
-
+    TextInputEditText editText;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     TextView totalPrice;
+    String code="1";
 
     public myCart() {
         // Required empty public constructor
@@ -86,7 +95,48 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
         View rootView = inflater.inflate(R.layout.fragment_my_cart, container, false);
         MaterialToolbar toolbar = rootView.findViewById(R.id.topAppBar);
         totalPrice = rootView.findViewById(R.id.totalPrice);
+        editText = rootView.findViewById(R.id.code);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // This method is called before the text is changed
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // This method is called when the text is being changed
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // This method is called after the text has been changed
+                String userInput = editable.toString();
+                Log.d("ok code", "oke");
+                Log.d("ok code", userInput);
+                double total = 0;
+                for (int i = 0; i < coffeeCarts.size(); ++i) {
+                    if (coffeeCarts.get(i).isSelected())
+                        total += coffeeCarts.get(i).getPrice();
+                }
+                if (userInput.equals("CS426")) {
+                    Log.d("ok code", String.valueOf(((MainActivity)requireActivity()).getNewMember()));
+
+                    if (((MainActivity)requireActivity()).getNewMember() == 1)
+                    {
+
+                        totalPrice.setText("TOTAL: $ " + String.valueOf(round(total*0.95)));
+                        code=userInput;
+
+                    }
+                    else
+                    {
+                        Toast.makeText(requireContext(), "Invalid code.", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {totalPrice.setText("TOTAL: $ " + String.valueOf(total)); code="1";}
+                // Do something with the user input after they finish typing
+            }
+        });
         Button checkout = rootView.findViewById(R.id.checkOut);
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +165,22 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
                 }
 
                 if (total > 0) {
-                    ((MainActivity) requireActivity()).removeAllCoffeeCart();
+
+                    if (code.equals("CS426")) {
+                        if (((MainActivity)requireActivity()).getNewMember() == 1)
+                        {
+                            total= round(total*0.95);
+                        }
+                    }
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if (currentUser != null) {
+                        String userId = currentUser.getUid();
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                        usersRef.child(userId).child("newMember").setValue(0);
+                        }
+                    ((MainActivity)requireActivity()).setNewMember(0);
+                        ((MainActivity) requireActivity()).removeAllCoffeeCart();
                     ((MainActivity) requireActivity()).setCoffeeCarts(temp);
                     BillItem tempBill = new BillItem(currentDate + " " + currentTime, ((MainActivity) requireActivity()).getAddress(), total,
                             tempOrdered);
@@ -219,7 +284,23 @@ public class myCart extends Fragment implements coffeeCartRecycleAdapter.OnItemC
                 total += coffeeCarts.get(i).getPrice();
         }
 
-        totalPrice.setText("TOTAL: $ " + String.valueOf(total));
+
+        Log.d("ok code", code);
+
+        if (code.equals("CS426")) {
+            if (((MainActivity)requireActivity()).getNewMember() == 1)
+            {
+
+                totalPrice.setText("TOTAL: $ " + String.valueOf(round(total*0.95)));
+
+
+            }
+            else
+            {
+                Toast.makeText(requireContext(), "Invalid code.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {totalPrice.setText("TOTAL: $ " + String.valueOf(total));code="1";}
     }
 
 }

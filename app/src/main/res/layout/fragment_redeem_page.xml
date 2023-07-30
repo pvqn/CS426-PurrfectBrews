@@ -51,7 +51,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/imageView"
-                    android:src="@drawable/c" />
+                    android:src="@drawable/b" />
             </com.google.android.material.card.MaterialCardView>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Latte x1"
+                    android:text="Cappuccino x1"
                     android:id="@+id/nameCoffee"
                     android:fontFamily="@font/vt323"
                     android:textAlignment="textStart"
